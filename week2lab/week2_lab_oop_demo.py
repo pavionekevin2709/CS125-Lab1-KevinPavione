@@ -1,4 +1,4 @@
-# "Week 2 Lab - Advanced OOP"
+# week2_lab_oop_demo
 # Kevin Pavione
 # January 20, 2026
 # Week 2 Lab - Advanced OOP
@@ -152,3 +152,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
