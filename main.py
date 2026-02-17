@@ -1,8 +1,8 @@
 """
-Name: Zach Wilson
+Name: Kevin Paviome
 Date: 1/15/2026
-Course: CS 125
 Simple OOP Demo - Covers all key concepts in ~50 lines
+Week 1 Lab
 """
 
 
@@ -13,8 +13,8 @@ class BankAccount:
     # SELF PARAMETER: Refers to the current object instance
     def __init__(self, owner, balance=0):
         # ATTRIBUTES: Store object-specific data
-        self.owner = owner  # Each account has its own owner
-        self.balance = balance  # Each account has its own balance
+        self.owner = owner
+        self.balance = balance
 
     # METHODS: Define behaviors that objects can perform
     def deposit(self, amount):
@@ -25,7 +25,7 @@ class BankAccount:
     def withdraw(self, amount):
         # Remove money if sufficient funds exist
         if amount > self.balance:
-            return # Insufficient funds!
+            return "Insufficient funds!"
         self.balance -= amount
         return f"Withdrew ${amount}. New balance: ${self.balance}"
 
@@ -33,18 +33,26 @@ class BankAccount:
         # Display account information
         return f"{self.owner}'s account: ${self.balance}"
 
-    # STUDENT EXERCISE
-    # TODO: Create two new methods below:
-    # 1. transfer(self, amount, other_account) - transfers money to another account
-    # 2. apply_interest(self, rate) - adds interest to the balance
-    #
+    # STUDENT EXERCISE METHODS
+
+    def transfer(self, amount, other_account):
+        # Transfer money if sufficient funds exist
+        if amount > self.balance:
+            return "Transfer failed: Insufficient funds!"
+        self.balance -= amount
+        other_account.balance += amount
+        return f"Transferred ${amount} to {other_account.owner}"
+
+    def apply_interest(self, rate):
+        self.balance += (self.balance * rate)
+        return f"Interest applied. New balance: ${self.balance}"
 
 
 # DEMONSTRATION
 
 # OBJECTS: Create instances from the class blueprint
-account1 = BankAccount("Alice", 1000)  # Object with $1000
-account2 = BankAccount("Bob", 500)  # Different object with $500
+account1 = BankAccount("Alice", 1000)
+account2 = BankAccount("Bob", 500)
 
 print("Initial Accounts:")
 print(account1.get_info())
@@ -59,18 +67,11 @@ print("\nFinal Balances:")
 print(account1.get_info())
 print(account2.get_info())
 
-# Each object maintains its own state independently!
+print("\nTesting transfer method:")
+print(account1.transfer(100, account2))
+print(account1.get_info())
+print(account2.get_info())
 
-# DEMO YOUR NEW METHODS HERE
-# Once you've created your two methods above, test them here!
-# Example calls (uncomment after implementing):
-#
-# print("\nTesting transfer method:")
-# print(account1.transfer(100, account2))
-# print(account1.get_info())
-# print(account2.get_info())
-#
-# print("\nTesting apply_interest method:")
-# print(account1.apply_interest(0.05))  # 5% interest
-# print(account1.get_info())
-#
+print("\nTesting apply_interest method:")
+print(account1.apply_interest(0.05))  # 5% interest
+print(account1.get_info())
